@@ -30,7 +30,7 @@ public class Main {
 
         int count=0;
         while(true){
-            v=new boolean[N][N];
+            v=new boolean[N+1][N+1];
             check = false;
 
             for(int i=0;i<N;i++){
@@ -38,7 +38,10 @@ public class Main {
                     if(!v[i][j]){
                         int gap1= Math.abs(map[i][j]-map[i][j+1]);
                         int gap2= Math.abs(map[i][j]-map[i+1][j]);
-                        if((gap1>=L&&gap1<=R)||(gap2>=L&&gap2<=R)){
+                        if((gap1>=L&&gap1<=R)&&!v[i][j+1]){
+                            bfs(i,j);
+                        }
+                        if((gap2>=L&&gap2<=R)&&!v[i+1][j]){
                             bfs(i,j);
                         }
                     }
