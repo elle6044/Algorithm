@@ -38,7 +38,7 @@ public class Main {
                     if(!v[i][j]){
                         int gap1= Math.abs(map[i][j]-map[i][j+1]);
                         int gap2= Math.abs(map[i][j]-map[i+1][j]);
-                        if((gap1>=L&&gap1<=R)||gap2>=L&&gap2<=R){
+                        if((gap1>=L&&gap1<=R)||(gap2>=L&&gap2<=R)){
                             bfs(i,j);
                         }
                     }
