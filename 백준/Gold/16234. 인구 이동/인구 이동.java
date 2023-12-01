@@ -58,9 +58,10 @@ public class Main {
     static int[] dr={1,-1,0,0};
     static int[] dc={0,0,1,-1,};
 
+    static Queue<Point> q=new ArrayDeque<>();
+    static Queue<Point> q2 = new ArrayDeque<>();
     private static void bfs(int i, int j) {
-        Queue<Point> q=new ArrayDeque<>();
-        Queue<Point> q2 = new ArrayDeque<>();
+
         int count=1;
         int sum=map[i][j];
         v[i][j]=true;
