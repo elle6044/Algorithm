@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayDeque;
+import java.util.Map;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -19,7 +20,7 @@ public class Main {
         L=Integer.parseInt(st.nextToken());
         R=Integer.parseInt(st.nextToken());
 
-        map=new int[N][N];
+        map=new int[N+1][N+1];
         for(int i=0;i<N;i++){
             st=new StringTokenizer(br.readLine());
             for(int j=0;j<N;j++){
@@ -35,10 +36,15 @@ public class Main {
             for(int i=0;i<N;i++){
                 for(int j=0;j<N;j++){
                     if(!v[i][j]){
-                        bfs(i,j);
+                        int gap1= Math.abs(map[i][j]-map[i][j+1]);
+                        int gap2= Math.abs(map[i][j]-map[i+1][j]);
+                        if((gap1>=L&&gap1<=R)||gap2>=L&&gap2<=R){
+                            bfs(i,j);
+                        }
                     }
                 }
             }
+
             if(!check) break;
             count++;
         }
