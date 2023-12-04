@@ -1,116 +1,98 @@
 import java.io.*;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class Main {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static StringTokenizer st;
 
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-	static StringTokenizer st;
-	
-	static int R,C;
-	static char[][]map;
-	static boolean[][]v;
-	
-	static int dr[]= {1,-1,0,0};
-	static int dc[]= {0,0,1,-1};
-	
-	public static void main(String[] args) throws IOException {
-		st=new StringTokenizer(br.readLine());
-		R=Integer.parseInt(st.nextToken());
-		C=Integer.parseInt(st.nextToken());
-		map=new char[R][C];
-		v=new boolean[R][C];
-		
-		int sr=0;
-		int sc=0;
-		
-		for(int r=0;r<R;r++) {
-			String word=br.readLine();
-			for(int c=0;c<C;c++) {
-				map[r][c]=word.charAt(c);
-				if(map[r][c]=='J') {
-					sr=r;
-					sc=c;
-				}
-			}
-		}
-		bfs();
-		
-		if(mincnt==0) {
-			bw.write("IMPOSSIBLE");
-		}
-		else {
-			bw.write(mincnt+"");
-		}
-		bw.close();
-		
+    static int N,M;
+    static char[][]map;
+    static boolean[][]v;
 
-	}
-	static int mincnt=Integer.MAX_VALUE;
-	
-	static class Point{
-		int r,c,cnt;
-		char name;
+    public static void main(String[] args) throws IOException {
+        st=new StringTokenizer(br.readLine());
+        N=Integer.parseInt(st.nextToken());
+        M=Integer.parseInt(st.nextToken());
 
-		public Point(int r, int c, int cnt, char name) {
-			super();
-			this.r = r;
-			this.c = c;
-			this.cnt = cnt;
-			this.name = name;
-		}
-	}
+        map=new char[N][M];
+        v=new boolean[N][M];
 
-	private static void bfs() throws IOException {
-		Queue<Point> q=new LinkedList();
-		int cnt=0;
-		
-		for(int r=0;r<R;r++) {
-			for(int c=0;c<C;c++) {
-				if(map[r][c]=='F') {
-					v[r][c]=true;
-					q.offer(new Point(r,c,0,'F'));
-				}
-			}
-		}
-		
-		for(int r=0;r<R;r++) {
-			for(int c=0;c<C;c++) {
-				if(map[r][c]=='J') {
-					v[r][c]=true;
-					q.offer(new Point(r,c,0,'J'));
-				}
-			}
-		}
-		
-		while(!q.isEmpty()) {
-			Point p=q.poll();
-			
-			if(p.name=='J'&&(p.r==0||p.r==R-1||p.c==0||p.c==C-1)) {
-				mincnt=Math.min(mincnt, p.cnt+1);
-				return;
-			}
-			
-			for(int d=0;d<4;d++) {
-				int nr=p.r+dr[d];
-				int nc=p.c+dc[d];
-				
-				if(p.name=='F') {
-					if(nr>=0&&nr<R&&nc>=0&&nc<C&&v[nr][nc]==false&&map[nr][nc]=='.') {
-						v[nr][nc]=true;
-						map[nr][nc]='F';
-						q.add(new Point(nr,nc,p.cnt+1,'F'));
-					}
-				}
-				else if(p.name=='J') {
-					if(nr>=0&&nr<R&&nc>=0&&nc<C&&v[nr][nc]==false&&map[nr][nc]=='.') {
-						v[nr][nc]=true;
-						map[nr][nc]='J';
-						q.add(new Point(nr,nc,p.cnt+1,'J'));
-					}
-				}
-			}	
-		}
-		mincnt=0;
-	}
+        for(int i=0;i<N;i++){
+            String input = br.readLine();
+            for(int j=0;j<M;j++){
+                char in = input.charAt(j);
+                map[i][j]=in;
+                if(in=='F'){
+                    q.offer(new Point(i,j,0,'F'));
+                    v[i][j]=true;
+                }
+            }
+        }
+
+        bfs();
+
+        if(minCnt==Integer.MAX_VALUE){
+            bw.write("IMPOSSIBLE");
+        }
+        else{
+            bw.write(minCnt+"");
+        }
+
+        bw.close();
+    }
+
+    static int[] dr={1,-1,0,0};
+    static int[] dc={0,0,1,-1};
+    static class Point{
+        int r,c,cnt;
+        char type;
+        public Point(int r, int c, int cnt, char type){
+            this.r=r;
+            this.c=c;
+            this.cnt=cnt;
+            this.type=type;
+        }
+    }
+    static int minCnt=Integer.MAX_VALUE;
+
+    static Queue<Point> q = new ArrayDeque<>();
+    private static void bfs() {
+        for(int i=0;i<N;i++){
+            for(int j=0;j<M;j++){
+                if(map[i][j]=='J'){
+                    q.offer(new Point(i,j,0,'J'));
+                    v[i][j]=true;
+                }
+            }
+        }
+
+        while(!q.isEmpty()){
+            Point p=q.poll();
+            if((p.r==0||p.c==0||p.r==N-1||p.c==M-1)&&p.type=='J'&&p.cnt<minCnt){
+                minCnt=p.cnt+1;
+                return;
+            }
+
+            for(int d=0;d<4;d++){
+                int nr=p.r+dr[d];
+                int nc=p.c+dc[d];
+                if(nr>=0&&nr<N&&nc>=0&&nc<M&&!v[nr][nc]&&map[nr][nc]=='.'){
+                    if(p.type=='J'){
+                        q.offer(new Point(nr,nc,p.cnt+1,'J'));
+                        map[nr][nc]='J';
+                    }
+                    else{
+                        q.offer(new Point(nr,nc,p.cnt+1,'F'));
+                        map[nr][nc]='F';
+                    }
+                    v[nr][nc]=true;
+                }
+            }
+        }
+
+
+    }
 }
