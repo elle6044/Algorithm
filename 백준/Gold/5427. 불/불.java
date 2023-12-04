@@ -82,14 +82,8 @@ public class Main {
                 int nr=p.r+dr[d];
                 int nc=p.c+dc[d];
                 if(nr>=0&&nr<N&&nc>=0&&nc<M&&!v[nr][nc]&&map[nr][nc]=='.'){
-                    if(p.type=='*'){
-                        v[nr][nc]=true;
-                        q.offer(new Point(nr,nc,p.cnt+1,'*'));
-                    }
-                    else{
-                        v[nr][nc]=true;
-                        q.offer(new Point(nr,nc,p.cnt+1,'@'));
-                    }
+                    q.offer(new Point(nr,nc,p.cnt+1,p.type));
+                    v[nr][nc]=true;
                 }
             }
         }
