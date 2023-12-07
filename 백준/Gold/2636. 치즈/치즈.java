@@ -45,15 +45,14 @@ public class Main {
             roofCount++;
         }
 
-        bw.write(roofCount+"\n");
-        bw.write(count+"");
+        bw.write(roofCount+"\n"+count);
         bw.close();
     }
 
     static int count=0;
+    static Queue<Point> q=new ArrayDeque<>();
 
     private static int bfs() {
-        Queue<Point> q = new ArrayDeque<>();
         q.offer(new Point(0,0));
         v[0][0]=true;
 
