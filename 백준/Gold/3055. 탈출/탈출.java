@@ -47,16 +47,16 @@ public class Main {
             for(int j=0;j<M;j++){
                 char input=word.charAt(j);
                 map[i][j]=input;
-                if(input=='S'){
-                    sr=i;
-                    sc=j;
+                if(input=='*'){
+                    q.offer(new Point(i,j,0,'*'));
                 }
                 else if(input=='D'){
                     er=i;
                     ec=j;
                 }
-                else if(input=='*'){
-                    q.offer(new Point(i,j,0,input));
+                else if(input=='S'){
+                    sr=i;
+                    sc=j;
                 }
             }
         }
@@ -77,9 +77,10 @@ public class Main {
     private static void bfs() {
         while(!q.isEmpty()){
             Point p=q.poll();
-            if(p.r==er&&p.c==ec&&p.type=='S'&&p.cnt<minCnt){
-                minCnt=p.cnt;
-            }
+//            if(p.r==er&&p.c==ec&&p.type=='S'&&p.cnt<minCnt){
+//                minCnt=p.cnt;
+//                return;
+//            }
 
             for(int d=0;d<4;d++){
                 int nr=p.r+dr[d];
@@ -91,8 +92,10 @@ public class Main {
                     }
                     else if(map[nr][nc]=='D'){
                         if(p.type=='S'){
-                            q.offer(new Point(nr,nc, p.cnt+1, p.type));
-                            v[nr][nc]=true;
+                            minCnt=p.cnt+1;
+                            return;
+//                            q.offer(new Point(nr,nc, p.cnt+1, p.type));
+//                            v[nr][nc]=true;
                         }
                     }
                 }
