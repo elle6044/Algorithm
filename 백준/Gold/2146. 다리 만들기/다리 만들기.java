@@ -67,6 +67,7 @@ public class Main {
         v[i][j]=true;
         while(!q.isEmpty()){
             Point p=q.poll();
+            if(p.cnt>=minCnt) continue;
             for(int d=0;d<4;d++){
                 int nr=p.r+dr[d];
                 int nc=p.c+dc[d];
