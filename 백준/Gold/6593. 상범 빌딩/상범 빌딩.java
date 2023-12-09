@@ -3,7 +3,7 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main{
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static StringTokenizer st;
@@ -88,7 +88,7 @@ public class Main {
 
         while(!q.isEmpty()){
             Point p = q.poll();
-            if(p.h==eh&&p.r==er&&p.c==ec&&p.cnt<minCnt){
+            if(map[p.h][p.r][p.c]=='E'&&p.cnt<minCnt){
                 minCnt=p.cnt;
             }
 
