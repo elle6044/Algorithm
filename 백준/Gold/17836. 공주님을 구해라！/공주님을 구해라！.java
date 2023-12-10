@@ -69,6 +69,7 @@ public class Main {
             if(p.r==N-1&&p.c==M-1&&p.cnt<minCnt&&p.cnt<=T){
                 minCnt=p.cnt;
             }
+            if(p.cnt>T) return;
 
             for(int d=0;d<4;d++){
                 int nr=p.r+dr[d];
