@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayDeque;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -14,16 +15,21 @@ public class Main {
 
     static int[] dr={1,-1,0,0};
     static int[] dc={0,0,1,-1};
-    static class Point{
+    static class Point implements Comparable<Point>{
         int r,c,black;
         public Point(int r,int c,int black){
             this.r=r;
             this.c=c;
             this.black=black;
         }
+
+        @Override
+        public int compareTo(Point o) {
+            return this.black-o.black;
+        }
     }
 
-    static Queue<Point> q=new ArrayDeque<>();
+    static PriorityQueue<Point> q=new PriorityQueue<>();
     static int minCnt=Integer.MAX_VALUE;
 
     public static void main(String[] args) throws IOException {
@@ -52,6 +58,7 @@ public class Main {
             Point p=q.poll();
             if(p.r==N-1&&p.c==N-1&&p.black<minCnt){
                 minCnt=p.black;
+                return;
             }
 
             for(int d=0;d<4;d++){
