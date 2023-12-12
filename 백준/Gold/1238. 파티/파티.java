@@ -23,8 +23,8 @@ public class Main {
     }
 
     static int V,E,X;
-    static ArrayList<Point>[] array;
-    static int[] dist;
+    static ArrayList<Point>[] array, arrayR;
+
 
     public static void main(String[] args) throws IOException {
         st=new StringTokenizer(br.readLine());
@@ -33,11 +33,12 @@ public class Main {
         X=Integer.parseInt(st.nextToken())-1;
 
         array=new ArrayList[V];
+        arrayR=new ArrayList[V];
         for(int i=0;i<V;i++){
             array[i]=new ArrayList<>();
+            arrayR[i]=new ArrayList<>();
         }
-        dist=new int[V];
-        Arrays.fill(dist,Integer.MAX_VALUE);
+
 
         for(int i=0;i<E;i++){
             st=new StringTokenizer(br.readLine());
@@ -45,44 +46,41 @@ public class Main {
             int e=Integer.parseInt(st.nextToken())-1;
             int w=Integer.parseInt(st.nextToken());
             array[s].add(new Point(e,w));
+            arrayR[e].add(new Point(s,w));
         }
 
-        PriorityQueue<Point> q=new PriorityQueue<>();
+        int[] distTo = dijkstra(array, X);
+        int[] distFrom = dijkstra(arrayR, X);
 
-        int[] answer=new int[V];
-        for(int start=0;start<V;start++){
-            Arrays.fill(dist,Integer.MAX_VALUE);
-            dist[start]=0;
-            q.add(new Point(start,0));
-            while(!q.isEmpty()){
-                Point p=q.poll();
-                if(p.w>dist[p.e]) continue;
-
-                for(Point np:array[p.e]){
-                    int nw=dist[p.e]+np.w;
-                    if(nw<dist[np.e]){
-                        q.add(new Point(np.e, nw));
-                        dist[np.e]=nw;
-                    }
-                }
-            }
-            if(start==X){
-                for(int i=0;i<V;i++){
-                    answer[i]+=dist[i];
-                }
-            }
-            else{
-                answer[start]+=dist[X];
-            }
-        }
-        int max=0;
+        int answer=0;
         for(int i=0;i<V;i++){
-            if(i==X) continue;
-            if(answer[i]>max) max=answer[i];
+            answer=Math.max(answer, distTo[i]+distFrom[i]);
         }
 
-        bw.write(max+"");
+        bw.write(answer+"");
         bw.close();
 
+    }
+
+    static int[] dijkstra(ArrayList<Point>[] array, int start){
+        int[] dist=new int[V];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        PriorityQueue<Point> pq=new PriorityQueue<>();
+        dist[start]=0;
+        pq.add(new Point(start,0));
+
+        while(!pq.isEmpty()){
+            Point p=pq.poll();
+            if(p.w>dist[p.e]) continue;
+
+            for(Point np:array[p.e]){
+                int nw=dist[p.e]+np.w;
+                if(nw<dist[np.e]){
+                    pq.add(new Point(np.e,nw));
+                    dist[np.e]=nw;
+                }
+            }
+        }
+        return dist;
     }
 }
