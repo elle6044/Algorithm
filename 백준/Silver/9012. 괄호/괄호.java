@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayDeque;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Main {
     static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
@@ -10,25 +11,32 @@ public class Main {
         int T=Integer.parseInt(br.readLine());
         for(int t=1;t<=T;t++){
             String word=br.readLine();
-            int answer=0;
+            Stack<Character> s=new Stack<>();
+            boolean check=false;
             for(int i=0;i<word.length();i++){
                 char input=word.charAt(i);
                 if(input=='('){
-                    answer++;
+                    s.push('(');
                 }
                 else{
-                    answer--;
-                    if(answer<0){
+                    if(!s.isEmpty()){
+                        s.pop();
+                    }
+                    else{
+                        check=true;
                         break;
                     }
                 }
             }
+            if(!s.isEmpty()){
+                check=true;
+            }
 
-            if(answer==0){
-                bw.write("YES\n");
+            if(check){
+                bw.write("NO\n");
             }
             else{
-                bw.write("NO\n");
+                bw.write("YES\n");
             }
         }
         bw.close();
