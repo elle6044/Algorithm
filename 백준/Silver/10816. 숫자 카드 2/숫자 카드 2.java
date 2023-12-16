@@ -5,29 +5,17 @@ import java.util.HashMap;
 public class Main {
     static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
     static int N,M;
-    static HashMap<Integer,Integer> map=new HashMap<>();
+    static int[] array=new int[20000001];
 
     public static void main(String[] args) throws Exception {
         N=nextInt();
         for(int i=0;i<N;i++){
-            int insert=nextInt();
-            if(!map.containsKey(insert)){
-                map.put(insert,1);
-            }
-            else{
-                map.put(insert, map.get(insert)+1);
-            }
+            array[nextInt()+10000000]++;
         }
 
         M=nextInt();
         for(int i=0;i<M;i++){
-            int insert=nextInt();
-            if(map.containsKey(insert)){
-                bw.write(map.get(insert)+" ");
-            }
-            else{
-                bw.write("0 ");
-            }
+            bw.write(array[nextInt()+10000000]+" ");
         }
         bw.close();
     }
