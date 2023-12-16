@@ -1,41 +1,51 @@
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayDeque;
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class Main {
     static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
     static int N,K;
-    static Queue<Integer> q;
+
+    static class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
 
     public static void main(String[] args) throws Exception {
         N=nextInt();
         K=nextInt();
 
-        q=new ArrayDeque<>(N);
-        for(int i=1;i<=N;i++){
-            q.offer(i);
+        Node head = new Node(1);
+        Node tail = head;
+        
+        for (int i = 2; i <= N; i++) {
+            tail.next = new Node(i);
+            tail = tail.next;
         }
+        tail.next = head;
 
-        int cnt=1;
         bw.write("<");
-        while(!q.isEmpty()){
-            int num=q.poll();
-            if(cnt%K!=0){
-                q.offer(num);
-            }
-            else{
-                if(q.isEmpty()){
-                    bw.write(num+">");
-                }
-                else{
-                    bw.write(num+", ");
-                }
-            }
-            cnt++;
-        }
 
+        Node current = head;
+        while (N-- > 0) {
+            for (int i = 1; i < K; i++) {
+                current = current.next;
+            }
+            bw.write(current.data+"");
+            if (N > 0) bw.write(", ");
+            
+            current.data = current.next.data;
+            current.next = current.next.next;
+        }
+        bw.write(">");
         bw.close();
     }
 
