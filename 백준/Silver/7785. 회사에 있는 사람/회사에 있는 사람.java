@@ -1,15 +1,12 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
     static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
     static StringTokenizer st;
     static int N;
-    static HashSet<String> hashSet=new HashSet<>();
+    static TreeSet<String> treeSet=new TreeSet<>(Comparator.reverseOrder());
 
     public static void main(String[] args) throws IOException {
         N=Integer.parseInt(br.readLine());
@@ -18,18 +15,13 @@ public class Main {
             st=new StringTokenizer(br.readLine());
             String name=st.nextToken();
             if(st.nextToken().equals("enter")){
-                hashSet.add(name);
+                treeSet.add(name);
             }
             else{
-                if(hashSet.contains(name)){
-                    hashSet.remove(name);
-                }
+                treeSet.remove(name);
             }
         }
-
-        ArrayList<String> array=new ArrayList<>(hashSet);
-        Collections.sort(array,Collections.reverseOrder());
-        for(String name:array){
+        for(String name:treeSet){
             bw.write(name+"\n");
         }
         bw.close();
