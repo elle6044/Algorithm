@@ -11,23 +11,24 @@ public class Main {
         int N=nextInt();
         int M=nextInt();
 
-        Set<Integer> set=new TreeSet<>();
-        for(int i=N;i<=M;i++){
-            if((i%2==0&&i!=2)||i==1){
-                continue;
-            }
-            set.add(i);
-        }
+        boolean[] isNotPrime=new boolean[M+1];
+        isNotPrime[0]=true;
+        isNotPrime[1]=true;
 
-        for(int i=3;i<=M/2;i++){
-            for(int j=2;j<M/i+1;j++){
-                set.remove(i*j);
+        for(int i=2;i*i<=M;i++){
+            if(!isNotPrime[i]){
+                for(int j=i*i;j<=M;j+=i){
+                    isNotPrime[j]=true;
+                }
             }
         }
 
-        for (Integer i : set) {
-            System.out.println(i);
+        for(int i=Math.max(2,N);i<=M;i++){
+            if(!isNotPrime[i]){
+                bw.write(i+"\n");
+            }
         }
+        bw.close();
     }
 
     static int nextInt() throws Exception {
