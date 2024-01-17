@@ -20,6 +20,7 @@ public class Main {
             Point p=pq.poll();
             if(p.num==0){
                 bw.write(cnt+"");
+                break;
             }
             cnt++;
         }
@@ -38,7 +39,7 @@ public class Main {
 
         @Override
         public int compareTo(Point o) {
-            return this.g!=o.g?o.g-this.g:this.s!=o.s?o.s-this.s:this.b!=b?o.b-this.b:this.num-o.num;
+            return this.g!=o.g?o.g-this.g:this.s!=o.s?o.s-this.s:this.b!=o.b?o.b-this.b:this.num-o.num;
         }
     }
 
