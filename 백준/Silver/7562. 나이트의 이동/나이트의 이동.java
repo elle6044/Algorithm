@@ -33,6 +33,7 @@ public class Main {
             Point p=q.poll();
             if(p.r==r2&&p.c==c2){
                 bw.write(p.cnt+"\n");
+                return;
             }
             for(int d=0;d<8;d++){
                 int nr=p.r+dr[d];
