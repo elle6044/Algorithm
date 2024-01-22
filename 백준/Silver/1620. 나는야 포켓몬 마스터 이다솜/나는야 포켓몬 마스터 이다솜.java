@@ -14,17 +14,15 @@ public class Main {
         int M=Integer.parseInt(st.nextToken());
         Map<String, Integer> map1=new HashMap<>(N);
         Map<Integer, String> map2=new HashMap<>(N);
-        int cnt=1;
-        for(int i=0;i<N;i++){
+        for(int i=1;i<=N;i++){
             String input= br.readLine();
-            map1.put(input, cnt);
-            map2.put(cnt, input);
-            cnt++;
+            map1.put(input, i);
+            map2.put(i, input);
         }
 
         for(int i=0;i<M;i++){
             String input=br.readLine();
-            if(isNum(input)){
+            if(input.charAt(0)>='0'&&input.charAt(0)<='9'){
                 bw.write(map2.get(Integer.parseInt(input))+"\n");
             }
             else{
@@ -32,15 +30,5 @@ public class Main {
             }
         }
         bw.close();
-    }
-
-    static boolean isNum(String input){
-        try{
-            Integer.parseInt(input);
-            return true;
-        }
-        catch (NumberFormatException e){
-            return false;
-        }
     }
 }
