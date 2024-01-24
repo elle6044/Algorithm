@@ -51,6 +51,7 @@ public class Main {
 //            System.out.println(p.idx+" : "+p.cnt);
             if(p.idx==eIdx){
                 minCnt=Math.min(minCnt, p.cnt);
+                break;
             }
 
             for(int d=1; d<=N/map[p.idx];d++){
