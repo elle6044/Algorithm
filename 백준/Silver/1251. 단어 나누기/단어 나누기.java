@@ -10,24 +10,32 @@ public class Main {
         String input=br.readLine();
         int len=input.length();
 
-        Set<String> set=new TreeSet<>();
+        String answer="";
 
 
         for(int i=0;i<len-2;i++){
             String word1=new StringBuilder(input.substring(0,i+1)).reverse().toString();
+            if(!answer.isEmpty()&&word1.compareTo(answer)>0){
+                continue;
+            }
             for(int j=i+1;j<len-1;j++){
                 String word2=new StringBuilder(input.substring(i+1,j+1)).reverse().toString();
                 String word3=new StringBuilder(input.substring(j+1)).reverse().toString();
 
                 String newWord=word1+word2+word3;
-                set.add(newWord);
+
+                if(answer.isEmpty()){
+                    answer=newWord;
+                }
+                else{
+                    if(newWord.compareTo(answer)<0){
+                        answer=newWord;
+                    }
+                }
             }
         }
 
-        for (String string : set) {
-            bw.write(string);
-            break;
-        }
+        bw.write(answer);
         bw.close();
     }
 }
