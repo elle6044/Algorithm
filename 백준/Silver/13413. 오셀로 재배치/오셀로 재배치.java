@@ -12,6 +12,7 @@ public class Main {
             boolean[][]map=new boolean[2][N];
             int[] whiteCnt=new int[2];
 
+            int cnt=0;
             for(int i=0;i<2;i++){
                 String input=br.readLine();
                 for(int j=0;j<N;j++){
@@ -19,36 +20,13 @@ public class Main {
                         map[i][j]=true;
                         whiteCnt[i]++;
                     }
-                }
-            }
-
-            int answer=Math.abs(whiteCnt[0]-whiteCnt[1]);
-            for(int i=0;i<answer;i++){
-                if(whiteCnt[0]>whiteCnt[1]){
-                    for(int j=0;j<N;j++){
-                        if(map[0][j]&&!map[1][j]){
-                            map[0][j]=false;
-                            break;
-                        }
-                    }
-                }
-                else{
-                    for(int j=0;j<N;j++){
-                        if(!map[0][j]&&map[1][j]){
-                            map[0][j]=true;
-                            break;
-                        }
+                    if(i==1&&map[0][j]!=map[1][j]){
+                        cnt++;
                     }
                 }
             }
 
-            int switchCnt=0;
-            for (int i=0;i<N;i++){
-                if(map[0][i]!=map[1][i]){
-                    switchCnt++;
-                }
-            }
-            answer+=switchCnt/2;
+            int answer=(cnt+Math.abs(whiteCnt[0]-whiteCnt[1]))/2;
 
             bw.write(answer+"\n");
         }
