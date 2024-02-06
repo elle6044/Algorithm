@@ -12,24 +12,24 @@ public class Main {
             int p1=0;
             int p2=input.length()-1;
             int isPal=0;
-            input=input+" ";
-            while(p1<=p2){
-                if(input.charAt(p1)==input.charAt(p2)){
 
-                }
-                else{
-                    String sub1=input.substring(p1,p2);
-                    String sub2=input.substring(p1+1,p2+1);
-                    if(isPalindrome(sub1)||isPalindrome(sub2)){
-                        isPal=1;
+            if(!isPalindrome(input)){
+                while(p1<=p2){
+                    if(input.charAt(p1)!=input.charAt(p2)){
+                        String sub1=input.substring(p1,p2);
+                        String sub2=input.substring(p1+1,p2+1);
+                        if(isPalindrome(sub1)||isPalindrome(sub2)){
+                            isPal=1;
+                        }
+                        else{
+                            isPal=2;
+                        }
+                        break;
                     }
-                    else{
-                        isPal=2;
-                    }
-                    break;
+
+                    p1++;
+                    p2--;
                 }
-                p1++;
-                p2--;
             }
             bw.write(isPal+"\n");
         }
