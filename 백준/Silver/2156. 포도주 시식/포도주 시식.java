@@ -14,21 +14,15 @@ public class Main {
         int[] dp=new int[n+1];
         dp[0]=array[0];
         dp[1]=array[1]+array[0];
-        if(n>=2){
-            if(n >= 3) {
-                dp[2] = Math.max(dp[1], Math.max(array[0] + array[2], array[1] + array[2]));
-                for(int i = 3; i < n; i++){
-                    dp[i] = Math.max(dp[i-1], Math.max(dp[i-2] + array[i], dp[i-3] + array[i-1] + array[i]));
-                }
+        if(n >= 3) {
+            dp[2] = Math.max(dp[1], Math.max(array[0] + array[2], array[1] + array[2]));
+            for(int i = 3; i < n; i++){
+                dp[i] = Math.max(dp[i-1], Math.max(dp[i-2] + array[i], dp[i-3] + array[i-1] + array[i]));
             }
-
         }
 
-        int max=0;
-        for (int i : dp) {
-            max=Math.max(max,i);
-        }
-        bw.write(max+"");
+//        System.out.println(Arrays.toString(dp));
+        bw.write(dp[n-1]+"");
         bw.close();
     }
     static int nextInt() throws Exception {
