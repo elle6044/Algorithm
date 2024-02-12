@@ -15,18 +15,13 @@ public class Main {
         dp[0]=array[0];
         dp[1]=array[1]+array[0];
         if(n>=2){
-            dp[2]=Math.max(array[0],array[1])+array[2];
-            for(int i=3;i<n;i++){
-                int prevMax=0;
-                for(int j=0;j<i-1;j++){
-                    prevMax=Math.max(prevMax,dp[j]);
+            if(n >= 3) {
+                dp[2] = Math.max(dp[1], Math.max(array[0] + array[2], array[1] + array[2]));
+                for(int i = 3; i < n; i++){
+                    dp[i] = Math.max(dp[i-1], Math.max(dp[i-2] + array[i], dp[i-3] + array[i-1] + array[i]));
                 }
-                int prevMax2=0;
-                for(int j=0;j<i-2;j++){
-                    prevMax2=Math.max(prevMax2,dp[j]+array[i-1]);
-                }
-                dp[i]=Math.max(prevMax,prevMax2)+array[i];
             }
+
         }
 
         int max=0;
