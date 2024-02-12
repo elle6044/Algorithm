@@ -16,9 +16,9 @@ public class Main {
         Arrays.fill(dp,1);
         int[] prev=new int[n];
 
-        for(int i=0;i<n;i++){
-            for(int j=0;j<i;j++){
-                if(array[i]>array[j]){
+        for(int i=n-1;i>=0;i--){
+            for(int j=n-1;j>i;j--){
+                if(array[i]<array[j]){
                     if(dp[j]+1>dp[i]){
                         dp[i]=dp[j]+1;
                         prev[i]=j;
@@ -36,18 +36,13 @@ public class Main {
             }
         }
         bw.write(max+"\n");
-        Stack<Integer> stack=new Stack<>();
         for(int i=0;i<max;i++){
-            stack.push(array[idx]);
+            bw.write(array[idx]+" ");
             idx=prev[idx];
-        }
-        while (!stack.isEmpty()){
-            bw.write(stack.pop()+" ");
         }
         bw.close();
 
     }
-
     static int nextInt() throws Exception {
         int sign = 0;
         int n = 0;
@@ -61,5 +56,4 @@ public class Main {
         while ((c = System.in.read()) > 47 && c < 58);
         return sign == 0 ? n : ~n + 1;
     }
-
 }
