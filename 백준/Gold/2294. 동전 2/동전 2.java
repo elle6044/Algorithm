@@ -1,9 +1,6 @@
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Main {
     static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
@@ -11,29 +8,19 @@ public class Main {
     public static void main(String[] args) throws Exception {
         int n=nextInt();
         int k=nextInt();
-        Set<Integer> set=new TreeSet<>(Comparator.reverseOrder());
+        Set<Integer> set=new HashSet<>();
         for(int i=0;i<n;i++){
             set.add(nextInt());
         }
-
 
         int[] dp=new int[k+1];
         for(int i=1;i<=k;i++){
             for (int coin : set) {
                 int coinCnt=i/coin;
                 for(int j=1;j<=coinCnt;j++){
-                    if(dp[i]==0){
-                        if(i-coin*j!=0&&dp[i-coin*j]==0){
-
-                        }
-                        else{
+                    if(i-coin*j==0||dp[i-coin*j]!=0){
+                        if(dp[i]==0){
                             dp[i]=dp[i-coin*j]+j;
-                        }
-
-                    }
-                    else{
-                        if(i-coin*j!=0&&dp[i-coin*j]==0){
-
                         }
                         else{
                             dp[i]=Math.min(dp[i],
