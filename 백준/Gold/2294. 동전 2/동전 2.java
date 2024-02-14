@@ -14,24 +14,18 @@ public class Main {
         }
 
         int[] dp=new int[k+1];
-        for(int i=1;i<=k;i++){
-            for (int coin : set) {
-                int coinCnt=i/coin;
-                for(int j=1;j<=coinCnt;j++){
-                    if(i-coin*j==0||dp[i-coin*j]!=0){
-                        if(dp[i]==0){
-                            dp[i]=dp[i-coin*j]+j;
-                        }
-                        else{
-                            dp[i]=Math.min(dp[i],
-                                    dp[i-coin*j]+j);
-                        }
-                    }
-                }
+        Arrays.fill(dp,10001);
+        dp[0]=0;
+
+        for( int coin : set){
+            for(int i=coin;i<=k;i++){
+                dp[i]=Math.min(dp[i],dp[i-coin]+1);
             }
         }
 
-        if(dp[k]==0){
+
+
+        if(dp[k]==10001){
             bw.write("-1");
         }
         else{
