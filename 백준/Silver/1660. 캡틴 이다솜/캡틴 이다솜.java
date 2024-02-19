@@ -19,19 +19,6 @@ public class Main {
             dp2[i]=i;
         }
 
-
-//        for(int k=2;true;k++){
-//            int num=dp[k];
-//            if(num>n) break;
-//            for(int i=num;i<=n;i++){
-//                int cnt=i/num;
-//                for(int j=1;j<=cnt;j++){
-//                    if (j>=dp2[i]) break;
-//                    dp2[i]=Math.min(dp2[i],cnt+dp2[i-cnt*num]);
-//                }
-//            }
-//        }
-
         for(int k=2;true;k++){
             int num=dp[k];
             if(num>n) break;
