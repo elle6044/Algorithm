@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -8,21 +7,21 @@ public class Main {
     static StringTokenizer st;
 
     static int N,M;
-    static int[] array;
+    static byte[] array;
 
     public static void main(String[] args) throws IOException {
         st=new StringTokenizer(br.readLine());
         N=Integer.parseInt(st.nextToken());
         M=Integer.parseInt(st.nextToken());
 
-        array=new int[M];
+        array=new byte[M];
 
-        back(0,0);
+        back(0);
 
         bw.close();
     }
 
-    private static void back(int cnt, int idx) throws IOException {
+    private static void back(int cnt) throws IOException {
         if(cnt==M){
             for (int i : array) {
                 bw.write(i+" ");
@@ -31,9 +30,9 @@ public class Main {
             return;
         }
 
-        for(int i=0;i<N;i++){
-            array[cnt]=i+1;
-            back(cnt+1, i);
+        for(byte i=1;i<=N;i++){
+            array[cnt]=i;
+            back(cnt+1);
         }
     }
 }
