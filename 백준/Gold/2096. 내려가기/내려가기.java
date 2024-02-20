@@ -1,6 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class Main {
     static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
@@ -8,51 +9,42 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         int n=nextInt();
-        byte[][] map=new byte[n+1][3];
-        int[][] dp=new int[n+1][3];
-        for(int i=1;i<=n;i++){
+        byte[][] map=new byte[n][3];
+        int[][] dpMax=new int[n][3];
+        int[][] dpMin=new int[n][3];
+        for (int[] ints : dpMin) {
+            Arrays.fill(ints, Integer.MAX_VALUE);
+        }
+        for(int i=0;i<n;i++){
             for(int j=0;j<3;j++){
                 map[i][j]= (byte) nextInt();
-                dp[i][j]=map[i][j];
             }
         }
-
-        for(int i=1;i<=n;i++){
-            for(int j=0;j<3;j++){
-                for(int d=0;d<3;d++){
-                    int nr=i-1;
-                    int nc=j+dc[d];
-                    if(nr>=0&&nr<n&&nc>=0&&nc<3){
-                        dp[i][j]=Math.max(dp[i][j],dp[nr][nc]+map[i][j]);
-                    }
-                }
-            }
-        }
-        int max=Integer.MIN_VALUE;
         for(int i=0;i<3;i++){
-            max=Math.max(max,dp[n][i]);
+            dpMax[0][i]=map[0][i];
+            dpMin[0][i]=map[0][i];
         }
-        bw.write(max+" ");
 
-        for(int i=1;i<=n;i++){
+        for(int i=1;i<n;i++){
             for(int j=0;j<3;j++){
                 for(int d=0;d<3;d++){
                     int nr=i-1;
                     int nc=j+dc[d];
-                    if(nr>=0&&nr<n&&nc>=0&&nc<3){
-                        dp[i][j]=Math.min(dp[i][j],dp[nr][nc]+map[i][j]);
+                    if(nc>=0&&nc<3){
+                        dpMax[i][j]=Math.max(dpMax[i][j],dpMax[nr][nc]+map[i][j]);
+                        dpMin[i][j]=Math.min(dpMin[i][j],dpMin[nr][nc]+map[i][j]);
                     }
                 }
             }
         }
+
+        int max=Integer.MIN_VALUE;
         int min=Integer.MAX_VALUE;
         for(int i=0;i<3;i++){
-            min=Math.min(min,dp[n][i]);
+            max=Math.max(max,dpMax[n-1][i]);
+            min=Math.min(min,dpMin[n-1][i]);
         }
-        bw.write(min+"");
-
-
-
+        bw.write(max+" "+min);
 
         bw.close();
     }
