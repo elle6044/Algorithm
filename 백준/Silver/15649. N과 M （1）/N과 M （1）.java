@@ -9,17 +9,23 @@ public class Main {
 
     static int N,M;
 
+    static int[] array;
+    static boolean[] v;
+
     public static void main(String[] args) throws IOException {
         st=new StringTokenizer(br.readLine());
         N=Integer.parseInt(st.nextToken());
         M=Integer.parseInt(st.nextToken());
 
-        back(new int[M], new boolean[N], 0);
+        array=new int[M];
+        v=new boolean[N];
+
+        back(0);
 
         bw.close();
     }
 
-    private static void back(int[] array, boolean[] v, int cnt) throws IOException {
+    private static void back(int cnt) throws IOException {
         if(cnt==M){
             for (int i : array) {
                 bw.write(i+" ");
@@ -33,7 +39,7 @@ public class Main {
 
             array[cnt]=i+1;
             v[i]=true;
-            back(array, v, cnt+1);
+            back(cnt+1);
             v[i]=false;
         }
     }
