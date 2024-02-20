@@ -5,6 +5,7 @@ public class Main {
     static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
     static StringTokenizer st;
+    static StringBuilder sb=new StringBuilder();
 
     static int N,M;
     static byte[] array;
@@ -18,15 +19,16 @@ public class Main {
 
         back(0);
 
+        bw.write(sb.toString());
         bw.close();
     }
 
     private static void back(int cnt) throws IOException {
         if(cnt==M){
             for (int i : array) {
-                bw.write(i+" ");
+                sb.append(i).append(" ");
             }
-            bw.write("\n");
+            sb.append("\n");
             return;
         }
 
