@@ -11,7 +11,6 @@ public class Main {
     static ArrayList<Point> storeArray =new ArrayList<>();
     static ArrayList<Point> houseArray=new ArrayList<>();
     static int[] array;
-    static boolean[] v;
     static int storeNum=0;
 
     public static void main(String[] args) throws Exception {
@@ -33,7 +32,6 @@ public class Main {
 
         for(int i=1;i<=M;i++){
             array=new int[i];
-            v=new boolean[storeNum];
             back(i,0);
         }
 
@@ -58,12 +56,8 @@ public class Main {
         }
 
         for(int i=idx;i<storeNum;i++){
-            if(!v[i]){
-                array[cnt-1]=i;
-                v[i]=true;
-                back(cnt-1,i);
-                v[i]=false;
-            }
+            array[cnt-1]=i;
+            back(cnt-1,i+1);
         }
     }
 
