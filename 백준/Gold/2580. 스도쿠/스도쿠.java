@@ -1,14 +1,12 @@
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Main {
     static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
 
-    static boolean[][][] numCheck=new boolean[2][9][10];
     static int[][] map=new int[9][9];
     static int zeroCnt=0;
 
@@ -18,8 +16,6 @@ public class Main {
             for(int j=0;j<9;j++){
                 int input=nextInt();
                 map[i][j]=input;
-                numCheck[0][i][input]=true;
-                numCheck[1][j][input]=true;
                 if(input==0) zeroCnt++;
             }
         }
@@ -48,16 +44,10 @@ public class Main {
                 if (isEnd) return;
                 if(map[i][j]==0){
                     for(int num=1;num<=9;num++){
-                        if(!numCheck[0][i][num]&&
-                                !numCheck[1][j][num]&&
-                                isPossible(i,j,num)){
+                        if(isPossible(i,j,num)){
                             map[i][j]=num;
-                            numCheck[0][i][num]=true;
-                            numCheck[1][j][num]=true;
                             back(r,c,cnt+1);
                             map[i][j]=0;
-                            numCheck[0][i][num]=false;
-                            numCheck[1][j][num]=false;
                         }
                         if (isEnd) return;
                     }
@@ -89,6 +79,12 @@ public class Main {
     }
 
     private static boolean isPossible(int r, int c, int num) {
+        for(int i=0;i<9;i++){
+            if(map[r][i]==num||map[i][c]==num){
+                return false;
+            }
+        }
+
         int nr=r/3*3;
         int nc=c/3*3;
         for(int i=nr;i<nr+3;i++){
