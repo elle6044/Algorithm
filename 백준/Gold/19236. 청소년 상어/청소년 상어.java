@@ -67,7 +67,6 @@ public class Main {
                         fish1.r=nr;
                         fish1.c=nc;
                         fish1.d=nd;
-
                         break;
                     }
                     else if(nowMap[nr][nc]==0){
@@ -108,18 +107,12 @@ public class Main {
             }
         }
     }
-
     static class Point{
         int r,c,num,d;
         public Point(int r,int c,int num,int d){
             this.r=r;
             this.c=c;
             this.num=num;
-            this.d=d;
-        }
-        public void change(int r, int c, int d){
-            this.r=r;
-            this.c=c;
             this.d=d;
         }
     }
