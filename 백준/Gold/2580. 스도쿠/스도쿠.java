@@ -4,6 +4,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Stack;
 
 public class Main {
     static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
@@ -32,18 +33,19 @@ public class Main {
 
         back(0);
 
+        bw.write(sb.toString());
         bw.close();
-
     }
 
     static boolean isEnd=false;
+    static StringBuilder sb=new StringBuilder();
     private static void back(int cnt) throws IOException {
         if(cnt==list.size()){
             for (int[] ints : map) {
                 for (int i : ints) {
-                    bw.write(i+" ");
+                    sb.append(i).append(" ");
                 }
-                bw.write("\n");
+                sb.append("\n");
             }
             isEnd=true;
             return;
