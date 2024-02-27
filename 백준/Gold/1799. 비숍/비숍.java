@@ -36,7 +36,6 @@ public class Main {
 
     static int answer=0;
     private static void back(int cnt,int allCnt) {
-
         if(allCnt==2*N-1){
             return;
         }
@@ -52,7 +51,6 @@ public class Main {
             if(map[i][j]==1){
                 if(!check1[i+j]&&!check2[N-1-i+j]){
                     check=true;
-                    map[i][j]=0;
                     check1[i+j]=true;
                     check2[N-1-i+j]=true;
                     cnt++;
@@ -60,7 +58,6 @@ public class Main {
 
                     back(cnt,allCnt+1);
 
-                    map[i][j]=1;
                     check1[i+j]=false;
                     check2[N-1-i+j]=false;
                     cnt--;
