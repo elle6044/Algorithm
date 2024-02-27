@@ -40,7 +40,7 @@ public class Main {
         if(allCnt==2*N-1){
             return;
         }
-        if(cnt==2*N-1){
+        if(cnt==2*N-2){
             return;
         }
 
@@ -52,7 +52,6 @@ public class Main {
             if(map[i][j]==1){
                 if(!check1[i+j]&&!check2[N-1-i+j]){
                     check=true;
-//                    System.out.println(cnt+1+" "+i+" "+j);
                     map[i][j]=0;
                     check1[i+j]=true;
                     check2[N-1-i+j]=true;
