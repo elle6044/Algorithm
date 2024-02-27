@@ -9,7 +9,6 @@ public class Main {
     static boolean[] check1;
     static boolean[] check2;
     static int maxCnt;
-    static int oneCnt;
 
     public static void main(String[] args) throws Exception {
         N=nextInt();
@@ -22,9 +21,6 @@ public class Main {
             for(int j=0;j<N;j++){
                 int input=nextInt();
                 map[i][j]=input;
-                if(input==1){
-                    oneCnt++;
-                }
             }
         }
 
