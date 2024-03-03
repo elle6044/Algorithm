@@ -7,19 +7,20 @@ public class Main {
     static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
 
-    static String input;
     static char[] map;
+    static int N;
     static boolean[] v;
     static char[] array;
     public static void main(String[] args) throws IOException {
-        input=br.readLine();
-        map=new char[input.length()];
-        for(int i=0;i<input.length();i++){
+        String input=br.readLine();
+        N=input.length();
+        map=new char[N];
+        for(int i=0;i<N;i++){
             map[i]=input.charAt(i);
         }
         Arrays.sort(map);
-        v=new boolean[input.length()];
-        array=new char[input.length()];
+        v=new boolean[N];
+        array=new char[N];
 
         back(0);
 
@@ -29,8 +30,8 @@ public class Main {
 
     static int answer=0;
     private static void back(int cnt) {
-        if(cnt==input.length()){
-            for(int i=1;i<input.length();i++){
+        if(cnt==N){
+            for(int i=1;i<N;i++){
                 if(array[i-1]==array[i]){
                     return;
                 }
@@ -41,7 +42,7 @@ public class Main {
         }
 
         char temp=' ';
-        for(int i=0;i<input.length();i++){
+        for(int i=0;i<N;i++){
             if(temp==map[i]) continue;
             if(!v[i]){
                 array[cnt]=map[i];
