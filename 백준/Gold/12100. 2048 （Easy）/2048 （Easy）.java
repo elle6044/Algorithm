@@ -57,188 +57,69 @@ public class Main {
             case 0:
                 for(int i=1;i<N;i++){
                     for(int j=0;j<N;j++){
-                        if(newMap[i][j]>0){
-                            int nr=i;
-                            int nc=j;
-                            while(true){
-                                nr+=dr[d];
-                                nc+=dc[d];
-                                if(nr<0||nr>=N||nc<0||nc>=N) break;
-
-                                if(newMap[nr][nc]!=0) {
-                                    if(newMap[i][j]==newMap[nr][nc]){
-                                        if(v[nr][nc]){
-//                                            nr-=dr[d];
-//                                            nc-=dc[d];
-                                            break;
-                                        }
-                                        else{
-                                            v[nr][nc]=true;
-                                            nr+=dr[d];
-                                            nc+=dc[d];
-                                            break;
-                                        }
-                                    }
-                                    else if(newMap[i][j]!=newMap[nr][nc]){
-//                                        nr-=dr[d];
-//                                        nc-=dc[d];
-                                        break;
-                                    }
-                                }
-
-
-                            }
-
-                            nr-=dr[d];
-                            nc-=dc[d];
-                            if(nr!=i||nc!=j){
-                                newMap[nr][nc]+=newMap[i][j];
-                                newMap[i][j]=0;
-                            }
-                        }
+                        calculate(i,j,d,newMap,v);
                     }
                 }
                 break;
-
             case 1:
                 for(int i=N-1;i>=0;i--){
                     for(int j=0;j<N;j++){
-                        if(newMap[i][j]>0){
-                            int nr=i;
-                            int nc=j;
-                            while(true){
-                                nr+=dr[d];
-                                nc+=dc[d];
-                                if(nr<0||nr>=N||nc<0||nc>=N) break;
-
-                                if(newMap[nr][nc]!=0) {
-                                    if(newMap[i][j]==newMap[nr][nc]){
-                                        if(v[nr][nc]){
-//                                            nr-=dr[d];
-//                                            nc-=dc[d];
-                                            break;
-                                        }
-                                        else{
-                                            v[nr][nc]=true;
-                                            nr+=dr[d];
-                                            nc+=dc[d];
-                                            break;
-                                        }
-                                    }
-                                    else if(newMap[i][j]!=newMap[nr][nc]){
-//                                        nr-=dr[d];
-//                                        nc-=dc[d];
-                                        break;
-                                    }
-                                }
-
-
-                            }
-
-                            nr-=dr[d];
-                            nc-=dc[d];
-                            if(nr!=i||nc!=j){
-                                newMap[nr][nc]+=newMap[i][j];
-                                newMap[i][j]=0;
-                            }
-                        }
+                        calculate(i,j,d,newMap,v);
                     }
                 }
                 break;
-
             case 2:
                 for(int i=0;i<N;i++){
                     for(int j=1;j<N;j++){
-                        if(newMap[i][j]>0){
-                            int nr=i;
-                            int nc=j;
-                            while(true){
-                                nr+=dr[d];
-                                nc+=dc[d];
-                                if(nr<0||nr>=N||nc<0||nc>=N) break;
-
-                                if(newMap[nr][nc]!=0) {
-                                    if(newMap[i][j]==newMap[nr][nc]){
-                                        if(v[nr][nc]){
-//                                            nr-=dr[d];
-//                                            nc-=dc[d];
-                                            break;
-                                        }
-                                        else{
-                                            v[nr][nc]=true;
-                                            nr+=dr[d];
-                                            nc+=dc[d];
-                                            break;
-                                        }
-                                    }
-                                    else if(newMap[i][j]!=newMap[nr][nc]){
-//                                        nr-=dr[d];
-//                                        nc-=dc[d];
-                                        break;
-                                    }
-                                }
-
-
-                            }
-
-                            nr-=dr[d];
-                            nc-=dc[d];
-                            if(nr!=i||nc!=j){
-                                newMap[nr][nc]+=newMap[i][j];
-                                newMap[i][j]=0;
-                            }
-                        }
+                        calculate(i,j,d,newMap,v);
                     }
                 }
                 break;
-
             case 3:
                 for(int i=0;i<N;i++){
                     for(int j=N-1;j>=0;j--){
-                        if(newMap[i][j]>0){
-                            int nr=i;
-                            int nc=j;
-                            while(true){
-                                nr+=dr[d];
-                                nc+=dc[d];
-                                if(nr<0||nr>=N||nc<0||nc>=N) break;
-
-                                if(newMap[nr][nc]!=0) {
-                                    if(newMap[i][j]==newMap[nr][nc]){
-                                        if(v[nr][nc]){
-//                                            nr-=dr[d];
-//                                            nc-=dc[d];
-                                            break;
-                                        }
-                                        else{
-                                            v[nr][nc]=true;
-                                            nr+=dr[d];
-                                            nc+=dc[d];
-                                            break;
-                                        }
-                                    }
-                                    else if(newMap[i][j]!=newMap[nr][nc]){
-//                                        nr-=dr[d];
-//                                        nc-=dc[d];
-                                        break;
-                                    }
-                                }
-
-
-                            }
-
-                            nr-=dr[d];
-                            nc-=dc[d];
-                            if(nr!=i||nc!=j){
-                                newMap[nr][nc]+=newMap[i][j];
-                                newMap[i][j]=0;
-                            }
-                        }
+                        calculate(i,j,d,newMap,v);
                     }
                 }
                 break;
         }
     }
+
+    private static void calculate(int i, int j, int d, int[][] newMap, boolean[][] v) {
+        if(newMap[i][j]>0){
+            int nr=i;
+            int nc=j;
+            while(true){
+                nr+=dr[d];
+                nc+=dc[d];
+                if(nr<0||nr>=N||nc<0||nc>=N) break;
+
+                if(newMap[nr][nc]!=0) {
+                    if(newMap[i][j]==newMap[nr][nc]){
+                        if(v[nr][nc]){
+                            break;
+                        }
+                        else{
+                            v[nr][nc]=true;
+                            nr+=dr[d];
+                            nc+=dc[d];
+                            break;
+                        }
+                    }
+                    else if(newMap[i][j]!=newMap[nr][nc]){
+                        break;
+                    }
+                }
+            }
+            nr-=dr[d];
+            nc-=dc[d];
+            if(nr!=i||nc!=j){
+                newMap[nr][nc]+=newMap[i][j];
+                newMap[i][j]=0;
+            }
+        }
+    }
+
     static int nextInt() throws Exception {
         int sign = 0;
         int n = 0;
