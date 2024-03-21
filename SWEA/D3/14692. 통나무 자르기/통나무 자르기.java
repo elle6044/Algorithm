@@ -1,0 +1,16 @@
+import java.io.*;
+import java.util.*;
+public class Solution {
+	static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
+	
+	public static void main(String[] args) throws Exception{
+		int T=Integer.parseInt(br.readLine());
+		for(int t=1;t<=T;t++) {
+			int N=Integer.parseInt(br.readLine());
+			bw.write("#"+t+" "+(N%2==0?"Alice":"Bob")+"\n");
+		}
+		bw.close();
+	}
+
+}
