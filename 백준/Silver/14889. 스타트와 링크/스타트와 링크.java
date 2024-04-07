@@ -8,7 +8,6 @@ public class Main {
 	
 	static int N;
 	static int[][] map;
-	static int allSum=0;
 	
 	public static void main(String[] args) throws Exception{
 		N=Integer.parseInt(br.readLine());
@@ -18,7 +17,6 @@ public class Main {
 			st=new StringTokenizer(br.readLine());
 			for(int j=0;j<N;j++) {
 				map[i][j]=Integer.parseInt(st.nextToken());
-				allSum+=map[i][j];
 			}
 		}
 		back(0);
@@ -46,6 +44,7 @@ public class Main {
 			return;
 		}
 		if(idx==N) return;
+		if(N/2-set.size()>N-1-idx) return;
 		
 		set.add(idx);
 		back(idx+1);
