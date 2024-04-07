@@ -9,6 +9,8 @@ public class Main {
 	static int N,M;
 	static int[][] map;
 	
+	static int maxNum;
+	
 	public static void main(String[] args) throws Exception{
 		st=new StringTokenizer(br.readLine());
 		N=Integer.parseInt(st.nextToken());
@@ -18,7 +20,9 @@ public class Main {
 		for(int i=0;i<N;i++) {
 			st=new StringTokenizer(br.readLine());
 			for(int j=0;j<M;j++) {
-				map[i][j]=Integer.parseInt(st.nextToken());
+				int input=Integer.parseInt(st.nextToken());
+				map[i][j]=input;
+				maxNum=Math.max(maxNum, input);
 			}
 		}
 		
@@ -40,6 +44,7 @@ public class Main {
 	static int answer=0;
 	
 	public static void back(int r, int c, int cnt, int dir, int sum) {
+		if(sum+(4-cnt)*maxNum<=answer) return;
 		if(cnt==4) {
 			answer=Math.max(answer, sum);
 			return;
