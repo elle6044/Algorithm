@@ -68,13 +68,8 @@ public class Main {
 			}
 			x=nr;
 			y=nc;
-			System.out.println(dice[7-bottom]);
+			bw.write(dice[7-bottom]+"\n");;
 		}
-		
-		
-		
-		
-
+		bw.close();
 	}
-
 }
