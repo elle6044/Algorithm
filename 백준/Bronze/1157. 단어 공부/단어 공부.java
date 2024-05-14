@@ -6,28 +6,25 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		String input=br.readLine();
 		input=input.toUpperCase();
-		
-		Map<Character,Integer> map=new HashMap();
+		int[] array=new int[26];
 		
 		for(int i=0;i<input.length();i++) {
-			char word=input.charAt(i);
-			map.put(word, map.getOrDefault(word, 0)+1);
+			array[input.charAt(i)-65]++;
 		}
 		
 		int mcnt=0;
-		char mword=' ';
-		for(char key:map.keySet()) {
-			int cnt=map.get(key);
-			if(mcnt<cnt) {
-				mcnt=cnt;
-				mword=key;
+		int mword=0;
+		for(int i=0;i<=25;i++) {
+			if(array[i]>mcnt) {
+				mcnt=array[i];
+				mword=i;
 			}
-			else if(mcnt==cnt) {
-				mword='?';
+			else if(array[i]==mcnt) {
+				mword=-2;
 			}
 		}
 		
-		bw.write(mword);
+		bw.write((char)(mword+65));
 		bw.close();
 
 	}
