@@ -6,13 +6,13 @@ public class Main {
 	static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
 	public static void main(String[] args) throws Exception{
 		int N=Integer.parseInt(br.readLine());
-		PriorityQueue<Integer> pq=new PriorityQueue();
+		int[] array=new int[N];
 		for(int i=0;i<N;i++) {
-			pq.offer(Integer.parseInt(br.readLine()));
+			array[i]=Integer.parseInt(br.readLine());
 		}
-		
-		while(!pq.isEmpty()) {
-			bw.write(pq.poll()+"\n");
+		Arrays.sort(array);
+		for(int a:array) {
+			bw.write(a+"\n");
 		}
 		bw.close();
 
