@@ -11,12 +11,13 @@ public class Main {
 			v[Integer.parseInt(br.readLine())]++;
 		}
 		
+		StringBuilder sb=new StringBuilder();
 		for(int i=0;i<10001;i++) {
 			for(int j=0;j<v[i];j++) {
-				bw.write(i+"\n");
+				sb.append(i).append("\n");
 			}
 		}
-		
+		bw.write(sb.toString());
 		bw.close();
 
 	}
