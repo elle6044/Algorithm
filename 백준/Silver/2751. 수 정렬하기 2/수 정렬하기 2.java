@@ -6,14 +6,17 @@ public class Main {
 	static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
 	public static void main(String[] args) throws Exception{
 		int N=Integer.parseInt(br.readLine());
-		PriorityQueue<Integer> pq=new PriorityQueue();
+		boolean[] v=new boolean[2000001];
 		for(int i=0;i<N;i++) {
-			pq.offer(Integer.parseInt(br.readLine()));
+			v[Integer.parseInt(br.readLine())+1000000]=true;
 		}
 		
-		while(!pq.isEmpty()) {
-			bw.write(pq.poll()+"\n");
+		for(int i=0;i<2000001;i++) {
+			if(v[i]) {
+				bw.write((i-1000000)+"\n");
+			}
 		}
+		
 		bw.close();
 
 	}
