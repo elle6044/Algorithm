@@ -6,14 +6,14 @@ public class Main {
 	static StringTokenizer st;
 	public static void main(String[] args) throws Exception{
 		int N=Integer.parseInt(br.readLine());
-		Set<Integer> set=new TreeSet();
+		boolean[] v=new boolean[2001];
 		st=new StringTokenizer(br.readLine());
 		for(int i=0;i<N;i++) {
-			set.add(Integer.parseInt(st.nextToken()));
+			v[Integer.parseInt(st.nextToken())+1000]=true;
 		}
 		
-		for(int a:set) {
-			bw.write(a+" ");
+		for(int i=0;i<2001;i++) {
+			if(v[i]) bw.write((i-1000)+" ");
 		}
 		bw.close();
 	}
