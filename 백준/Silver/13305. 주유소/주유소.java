@@ -17,9 +17,9 @@ public class Main {
 			price[i]=Integer.parseInt(st.nextToken());
 		}
 		
-		int minP=price[0];
-		int minD=0;
-		int sum=0;
+		long minP=price[0];
+		long minD=0;
+		long sum=0;
 		for(int i=0;i<N-1;i++) {
 			int pre=i;
 			int next=i+1;
