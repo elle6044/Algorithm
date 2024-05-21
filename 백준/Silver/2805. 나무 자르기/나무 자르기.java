@@ -12,15 +12,17 @@ public class Main {
 		N=Integer.parseInt(st.nextToken());
 		M=Integer.parseInt(st.nextToken());
 		
+		int max=0;
 		array=new int[N];
 		st=new StringTokenizer(br.readLine());
 		for(int i=0;i<N;i++) {
-			array[i]=Integer.parseInt(st.nextToken());
+			int a=Integer.parseInt(st.nextToken());
+			array[i]=a;
+			max=Math.max(max, a);
 		}
-		Arrays.sort(array);
 		
 		int low=0;
-		int high=array[N-1];
+		int high=max;
 		
 		int answer=0;
 		while(low<=high) {
