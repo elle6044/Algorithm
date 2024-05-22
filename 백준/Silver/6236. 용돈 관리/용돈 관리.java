@@ -39,7 +39,7 @@ public class Main {
 			}
 		}
 		
-		bw.write(++high+"");
+		bw.write(low+"");
 		bw.close();
 
 	}
