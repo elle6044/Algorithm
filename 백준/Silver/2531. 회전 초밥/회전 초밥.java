@@ -15,25 +15,26 @@ public class Main {
 		for(int i=0;i<N;i++) {
 			array[i]=Integer.parseInt(br.readLine());
 		}
-		Deque<Integer> dq=new ArrayDeque();
+		int[] check=new int[d+1];
 		
 		int answer=0;
 		int cnt=0;
 		
 		for(int i=0;i<k;i++) {
-			if(!dq.contains(array[i])) cnt++;
-			dq.offer(array[i]);
+			if(check[array[i]]==0) cnt++;
+			check[array[i]]++;
 		}
 		
 		for(int i=k;i<N+k;i++) {
 			int input=array[i%N];
-			int output=dq.poll();
+			int output=array[i-k];
 			
-			if(!dq.contains(input)) cnt++;
-			if(!dq.contains(output)) cnt--;
+			check[output]--;
+			if(check[input]==0) cnt++;
+			if(check[output]==0) cnt--;
+			check[input]++;
 			
-			dq.offer(input);
-			answer=Math.max(answer, cnt+(dq.contains(c)?0:1));
+			answer=Math.max(answer, cnt+(check[c]==0?1:0));
 		}
 		bw.write(answer+"");
 		bw.close();
