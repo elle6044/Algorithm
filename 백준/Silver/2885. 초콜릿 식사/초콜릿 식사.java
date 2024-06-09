@@ -16,10 +16,8 @@ public class Main {
 			while(N>0) {
 				cnt++;
 				s/=2;
-				for(int i=0;i<cnt*2;i++) {
-					if(N>=s) {
-						N-=s;
-					}
+				if(N>=s) {
+					N-=s;
 				}
 			}
 		}
