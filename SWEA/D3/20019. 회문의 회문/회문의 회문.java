@@ -15,6 +15,7 @@ public class Solution {
 						input.charAt(i)!=input.charAt(len/2-1-i)||
 						input.charAt(len-1-i)!=input.charAt(len/2+1+i)) {
 					bw.write("#"+t+" NO\n");
+                    
 					continue L;
 				}
 			}
