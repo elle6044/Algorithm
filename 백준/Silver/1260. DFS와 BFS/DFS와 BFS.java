@@ -1,12 +1,14 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
+
 public class Main {
+	
 	static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 	static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
 	static StringTokenizer st;
-	
+
 	static int N,M,V;
-	static Set<Integer>[] sets;
+	static Set[] sets;
 	
 	static boolean[] v;
 	public static void main(String[] args) throws Exception{
@@ -14,10 +16,11 @@ public class Main {
 		N=Integer.parseInt(st.nextToken());
 		M=Integer.parseInt(st.nextToken());
 		V=Integer.parseInt(st.nextToken())-1;
-		sets=new TreeSet[N];
 		
+		sets=new TreeSet[N];
 		for(int i=0;i<N;i++) {
-			sets[i]=new TreeSet();
+			TreeSet<Integer> set=new TreeSet();
+			sets[i]=set;
 		}
 		
 		for(int i=0;i<M;i++) {
@@ -27,44 +30,45 @@ public class Main {
 			sets[s].add(e);
 			sets[e].add(s);
 		}
-
+		
 		v=new boolean[N];
 		v[V]=true;
 		dfs(V);
-		sb.append("\n");
+		bw.write("\n");
 		
 		v=new boolean[N];
-		v[V]=true;
 		bfs(V);
 		
-		bw.write(sb.toString());
 		bw.close();
-		
 	}
 	
-	static StringBuilder sb=new StringBuilder();
-	static void bfs(int idx) {
+	static void dfs(int idx) throws Exception{
+		bw.write((idx+1)+" ");
+		
+		Set<Integer> set=sets[idx];
+		for(Integer next : set) {
+			if(!v[next]) {
+				v[next]=true;
+				dfs(next);
+			}
+		}
+	}
+	
+	static void bfs(int idx) throws Exception {
 		Queue<Integer> q=new ArrayDeque();
 		q.offer(idx);
+		v[idx]=true;
 		while(!q.isEmpty()) {
-			int a=q.poll();
-			sb.append((a+1)).append(" ");
-			Set<Integer> set=sets[a];
-			for(int b:set) {
-				if(!v[b]) {
-					q.offer(b);
-					v[b]=true;
+			int now=q.poll();
+			bw.write((now+1)+" ");
+			Set<Integer> set=sets[now];
+			for(Integer next : set) {
+				if(!v[next]) {
+					q.offer(next);
+					v[next]=true;
 				}
 			}
 		}
 	}
-	static void dfs(int idx) throws Exception {
-		sb.append((idx+1)).append(" ");
-		Set<Integer> set=sets[idx];
-		for(int a:set) {
-			if(v[a]) continue;
-			v[a]=true;
-			dfs(a);
-		}
-	}
+
 }
