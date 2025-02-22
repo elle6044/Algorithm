@@ -51,13 +51,11 @@ public class Main {
 	static boolean Check(int num) {
 		int student=N;
 		
-		for(int max:array) {
-			student-=(max/num+(max%num==0?0:1));
+		for(int gem:array) {
+			student-=(gem/num+(gem%num==0?0:1));
 			if(student<0) return false;
 		}
-		
-		
-		
+        
 		return true;
 	}
 }
