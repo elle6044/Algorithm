@@ -35,22 +35,22 @@ public class Main {
 		
 		int edgeCnt=0;
 		int answer=0;
-		int maxW=0;
 		
 		for(Edge edge : edgeList) {
+			if(edgeCnt==V-2) break;
+			
 			int rootA=find(edge.s);
 			int rootB=find(edge.e);
 			if(rootA!=rootB) {
 				edgeCnt++;
 				answer+=edge.w;
-				maxW=Math.max(maxW, edge.w);
 				union(rootA,rootB);
 			}
 			
-			if(edgeCnt==V-1) break;
+			
 		}
 		
-		bw.write((answer-maxW)+"");
+		bw.write(answer+"");
 		bw.close();
 	}
 	
